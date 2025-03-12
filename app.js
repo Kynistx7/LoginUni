@@ -95,6 +95,6 @@ function traduzirErro(codigo) {
 // Verificar se o usuário já está logado ao acessar o painel
 if (window.location.pathname === "/MapUnianchietas/") {
     if (!localStorage.getItem('user')) {
-        window.location.href = 'index.html';
+        window.location.href = 'https://kynistx7.github.io/MapUnianchietas/';
     }
 }
