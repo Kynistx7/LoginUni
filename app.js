@@ -2,12 +2,12 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-// Configuração do Firebase (corrigida)
+// Configuração do Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyAjvf_F-Fm95JCVYaHeh0Pwh5Ti5o7jsdM",
     authDomain: "projetodelogin-22eca.firebaseapp.com",
     projectId: "projetodelogin-22eca",
-    storageBucket: "projetodelogin-22eca.appspot.com", // Corrigido
+    storageBucket: "projetodelogin-22eca.appspot.com",
     messagingSenderId: "867232437473",
     appId: "1:867232437473:web:d9a334e645667cdb9093a0",
     measurementId: "G-8D7EGJPKPW"
@@ -17,6 +17,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+// Função de login
 window.login = function() {
     const email = document.getElementById('email').value.trim();
     const senha = document.getElementById('senha').value.trim();
@@ -35,15 +36,14 @@ window.login = function() {
 
             console.log("Login bem-sucedido! Redirecionando...");
 
-            // ✅ Redireciona para a página correta
+            // Redireciona para a página correta
             window.location.href = "https://kynistx7.github.io/MapUnianchietas/";  
         })
         .catch((error) => {
             console.error("Erro no login:", error);
-            alert("Erro: " + error.message);
+            alert("Erro: " + traduzirErro(error.code));
         });
 };
-
 
 // Função de Cadastro
 window.cadastrar = function() {
@@ -85,13 +85,15 @@ function traduzirErro(codigo) {
         "auth/user-not-found": "Usuário não encontrado!",
         "auth/email-already-in-use": "Este e-mail já está cadastrado!",
         "auth/weak-password": "A senha deve ter pelo menos 6 caracteres!",
-        "auth/invalid-email": "Formato de e-mail inválido!"
+        "auth/invalid-email": "Formato de e-mail inválido!",
+        "auth/network-request-failed": "Erro de rede. Verifique sua conexão!",
+        "auth/too-many-requests": "Muitas tentativas de login. Tente novamente mais tarde."
     };
     return erros[codigo] || "Ocorreu um erro, tente novamente.";
 }
 
 // Verificar se o usuário já está logado ao acessar o painel
-if (window.location.pathname.includes("https://kynistx7.github.io/MapUnianchietas/")) {
+if (window.location.pathname === "/MapUnianchietas/") {
     if (!localStorage.getItem('user')) {
         window.location.href = 'index.html';
     }
