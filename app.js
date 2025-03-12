@@ -36,7 +36,7 @@ window.login = function() {
             console.log("Login bem-sucedido! Redirecionando...");
 
             // ✅ Redireciona para a página correta
-            window.location.href = "https://kynistx7.github.io/MapUniAnchieta/";  
+            window.location.href = "https://kynistx7.github.io/MapUnianchietas/";  
         })
         .catch((error) => {
             console.error("Erro no login:", error);
@@ -91,7 +91,7 @@ function traduzirErro(codigo) {
 }
 
 // Verificar se o usuário já está logado ao acessar o painel
-if (window.location.pathname.includes("https://kynistx7.github.io/MapUniAnchieta/")) {
+if (window.location.pathname.includes("https://kynistx7.github.io/MapUnianchietas/")) {
     if (!localStorage.getItem('user')) {
         window.location.href = 'index.html';
     }
