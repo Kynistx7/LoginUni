@@ -2,41 +2,70 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro com Firebase</title>
+    <title>Login com Firebase</title>
     <link rel="stylesheet" href="style.css">
     <script src="app.js" type="module" defer></script>
 </head>
 <body>
     <div class="container">
         <div class="left-section">
-            <img src="logo.png" alt="Logo da Empresa" class="logo">
-            <h1>Lorem ipsum</h1>
-            <h2>Dolor sit amet Consectetur</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit</p>
+            <img src="templetes/Grupo-Anchieta-01 (1).png" alt="Logo da Empresa" class="logo">
+            <h1 id="welcome-text"></h1>
+            <h2 id="login-text"></h2>
         </div>
         <div class="right-section">
-            <div class="cadastro-box">
-                <h2>Cadastro</h2>
-                <form id="cadastro-form" onsubmit="event.preventDefault(); cadastrar();">
+            <div class="login-box">
+                <h2>Login</h2>
+                <form id="login-form" onsubmit="event.preventDefault(); login();">
                     <div class="input-group">
                         <label for="email">Email:</label>
                         <div class="input-wrapper">
                             <input type="email" id="email" placeholder="Email" required aria-label="Digite seu email">
-                            <span class="icon">📧</span>
+                            <span class="icon"></span>
                         </div>
                     </div>
                     <div class="input-group">
                         <label for="senha">Senha:</label>
                         <div class="input-wrapper">
                             <input type="password" id="senha" placeholder="Senha" required aria-label="Digite sua senha">
-                            <span class="icon">🔒</span>
+                            <span class="icon"></span>
                         </div>
                     </div>
-                    <button type="submit">Cadastrar</button>
+                    <button type="submit">Entrar</button>
                 </form>
-                <p>Já tem conta? <a href="index.html">Faça login aqui</a></p>
+                <p>Não tem conta? <a href="cadastro.html">Cadastre-se aqui</a></p>
             </div>
         </div>
     </div>
+    <script>
+        const welcomeText = document.getElementById('welcome-text');
+        const loginText = document.getElementById('login-text');
+
+        const welcomeString = "Seja bem vindo!";
+        const loginString = "Realize seu login.";
+
+        let welcomeIndex = 0;
+        let loginIndex = 0;
+
+        function typeWelcome() {
+            if (welcomeIndex < welcomeString.length) {
+                welcomeText.innerHTML += welcomeString.charAt(welcomeIndex);
+                welcomeIndex++;
+                setTimeout(typeWelcome, 35);
+            } else {
+                setTimeout(typeLogin, 300); // Pausa antes de iniciar o segundo texto
+            }
+        }
+
+        function typeLogin() {
+            if (loginIndex < loginString.length) {
+                loginText.innerHTML += loginString.charAt(loginIndex);
+                loginIndex++;
+                setTimeout(typeLogin, 35);
+            }
+        }
+
+        typeWelcome(); // Inicia a animação
+    </script>
 </body>
 </html>

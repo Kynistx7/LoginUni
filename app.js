@@ -17,10 +17,17 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+const loadingIndicator = document.createElement('div');
+loadingIndicator.textContent = 'Carregando...';
+loadingIndicator.style.display = 'none';
+document.body.appendChild(loadingIndicator);
+
 // Função de login
 window.login = function() {
+    loadingIndicator.style.display = 'block'; // Show loading indicator
     const email = document.getElementById('email').value.trim();
     const senha = document.getElementById('senha').value.trim();
+
 
     if (!email || !senha) {
         alert("Preencha todos os campos!");
@@ -30,14 +37,10 @@ window.login = function() {
     signInWithEmailAndPassword(auth, email, senha)
         .then((userCredential) => {
             const user = userCredential.user;
-
-            // Salva o usuário no LocalStorage
             localStorage.setItem('user', JSON.stringify({ email: user.email }));
-
             console.log("Login bem-sucedido! Redirecionando...");
-
-            // Redireciona para a página correta
-            window.location.href = "https://kynistx7.github.io/MapUniachietas/#";  
+      console.log(localStorage.getItem('user'));
+            window.location.href = "https://kynistx7.github.io/MapUniachietas/#";
         })
         .catch((error) => {
             console.error("Erro no login:", error);
@@ -45,10 +48,11 @@ window.login = function() {
         });
 };
 
-// Função de Cadastro
 window.cadastrar = function() {
+    loadingIndicator.style.display = 'block'; // Show loading indicator
     const email = document.getElementById('email').value.trim();
     const senha = document.getElementById('senha').value.trim();
+
 
     if (!email || !senha) {
         alert("Preencha todos os campos!");
@@ -93,8 +97,9 @@ function traduzirErro(codigo) {
 }
 
 // Verificar se o usuário já está logado ao acessar o painel
-if (window.location.pathname === "/MapUnianchietas/") {
+if (window.location.href.includes("MapUnianchietas")) {
+    console.log(window.location.href);
     if (!localStorage.getItem('user')) {
-        window.location.href ='https://kynistx7.github.io/MapUniachietas/';
+        window.location.href = 'https://kynistx7.github.io/MapUniachietas/';
     }
 }
