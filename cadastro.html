@@ -3,19 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Cadastro com Firebase</title>
+    <link rel="stylesheet" href="style.css">
     <script src="app.js" type="module" defer></script>
 </head>
 <body>
-    <h1>Cadastro</h1>
-    <form id="cadastro-form" onsubmit="event.preventDefault(); cadastrar();">
-        <label>Email:</label>
-        <input type="email" id="email" required><br><br>
-
-        <label>Senha:</label>
-        <input type="password" id="senha" required><br><br>
-
-        <button type="submit">Cadastrar</button>
-    </form>
-    <p>Já tem conta? <a href="index.html">Faça login aqui</a></p>
+    <div class="container">
+        <div class="left-section">
+            <img src="logo.png" alt="Logo da Empresa" class="logo">
+            <h1>Lorem ipsum</h1>
+            <h2>Dolor sit amet Consectetur</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit</p>
+        </div>
+        <div class="right-section">
+            <div class="cadastro-box">
+                <h2>Cadastro</h2>
+                <form id="cadastro-form" onsubmit="event.preventDefault(); cadastrar();">
+                    <div class="input-group">
+                        <label for="email">Email:</label>
+                        <div class="input-wrapper">
+                            <input type="email" id="email" placeholder="Email" required aria-label="Digite seu email">
+                            <span class="icon">📧</span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="senha">Senha:</label>
+                        <div class="input-wrapper">
+                            <input type="password" id="senha" placeholder="Senha" required aria-label="Digite sua senha">
+                            <span class="icon">🔒</span>
+                        </div>
+                    </div>
+                    <button type="submit">Cadastrar</button>
+                </form>
+                <p>Já tem conta? <a href="index.html">Faça login aqui</a></p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

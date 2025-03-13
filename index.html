@@ -3,29 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Login com Firebase</title>
-    <!-- Corrigido a importação do arquivo CSS -->
     <link rel="stylesheet" href="style.css">
-    <!-- Corrigido a importação do arquivo JavaScript -->
     <script src="app.js" type="module" defer></script>
 </head>
 <body>
-    <h1>Login</h1>
-    <form id="login-form">
-        <label for="email">Email:</label>
-        <input type="email" id="email" required aria-label="Digite seu email"><br><br>
-
-        <label for="senha">Senha:</label>
-        <input type="password" id="senha" required aria-label="Digite sua senha"><br><br>
-
-        <button type="submit">Entrar</button>
-    </form>
-    <p>Não tem conta? <a href="cadastro.html">Cadastre-se aqui</a></p>
-
-    <script>
-        document.getElementById("login-form").addEventListener("submit", function(event) {
-            event.preventDefault();
-            login();  // Supondo que a função login esteja no arquivo "app.js"
-        });
-    </script>
+    <div class="container">
+        <div class="left-section">
+            <img src="templetes/Grupo-Anchieta-01 (1).png" alt="Logo da Empresa" class="logo" width="100px">
+            <h1>Seja bem vindo!</h1>
+        </div>
+        <div class="right-section">
+            <div class="login-box">
+                <h2>Login</h2>
+                <form id="login-form">
+                    <div class="input-group">
+                        <label for="email">Email:</label>
+                        <div class="input-wrapper">
+                            <input type="email" id="email" placeholder="Email" required aria-label="Digite seu email">
+                            <span class="icon"></span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="senha">Senha:</label>
+                        <div class="input-wrapper">
+                            <input type="password" id="senha" placeholder="Senha" required aria-label="Digite sua senha">
+                            <span class="icon"></span>
+                        </div>
+                    </div>
+                    <button type="submit">Entrar</button>
+                </form>
+                <p>Não tem conta? <a href="cadastro.html">Cadastre-se aqui</a></p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
