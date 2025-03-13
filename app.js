@@ -37,7 +37,7 @@ window.login = function() {
             console.log("Login bem-sucedido! Redirecionando...");
 
             // Redireciona para a página correta
-            window.location.href = "https://kynistx7.github.io/MapUniachietas/";  
+            window.location.href = "https://kynistx7.github.io/MapUniachietas/#";  
         })
         .catch((error) => {
             console.error("Erro no login:", error);
