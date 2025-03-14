@@ -41,33 +41,10 @@ window.login = function() {
     signInWithEmailAndPassword(auth, email, senha)
         .then((userCredential) => {
             const user = userCredential.user;
-            const userId = user.uid; // Pega o ID do usuário
-
-            // Busca o nome do usuário no Firestore
-            const userDocRef = doc(db, "users", userId); // Assumindo que você tem uma coleção "users"
-            getDoc(userDocRef)
-                .then((docSnap) => {
-                    if (docSnap.exists()) {
-                        const userData = docSnap.data();
-                        const nomeUsuario = userData.nome; // Assumindo que o nome está no campo "nome"
-
-                        localStorage.setItem('user', JSON.stringify({
-                            email: user.email,
-                            nome: nomeUsuario
-                        }));
-                        console.log("Login bem-sucedido! Redirecionando...");
-                        window.location.href = "https://kynistx7.github.io/MapUniachietas/#";
-                    } else {
-                        console.error("Documento do usuário não encontrado!");
-                        alert("Erro ao buscar dados do usuário.");
-                    }
-                    loadingIndicator.style.display = 'none';
-                })
-                .catch((error) => {
-                    console.error("Erro ao buscar dados do usuário:", error);
-                    alert("Erro ao buscar dados do usuário.");
-                    loadingIndicator.style.display = 'none';
-                });
+            localStorage.setItem('user', JSON.stringify({ email: user.email })); // store just the email now.
+            console.log("Login bem-sucedido! Redirecionando...");
+            window.location.href = "https://kynistx7.github.io/MapUniachietas/#";
+            loadingIndicator.style.display = 'none';
         })
         .catch((error) => {
             console.error("Erro no login:", error);
@@ -88,7 +65,7 @@ window.cadastrar = function() {
     }
 
     createUserWithEmailAndPassword(auth, email, senha)
-        .then((userCredential) => {
+        .then(() => {
             alert("Cadastro realizado com sucesso!");
             window.location.href = 'https://kynistx7.github.io/LoginUni/';
             loadingIndicator.style.display = 'none';

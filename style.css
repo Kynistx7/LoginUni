@@ -11,12 +11,12 @@ body {
 
 .login {
     max-width: 300px;
-    margin-bottom: 20vh;
+    margin-bottom: 5vh; /* Reduz a margem inferior para dispositivos móveis */
 }
 
 .container {
     display: flex;
-    width: 80%;
+    width: 95%; /* Aumenta a largura para melhor aproveitamento em telas menores */
     max-width: 1200px;
     background-color: white;
     border-radius: 8px;
@@ -25,40 +25,39 @@ body {
 }
 
 .left-section {
-    width: 80%;
+    width: 100%; /* Ocupa toda a largura em telas menores */
     background: linear-gradient(135deg, #109abd, #0808c4);
     color: white;
-    padding: 60px;
+    padding: 30px; /* Reduz o padding para dispositivos móveis */
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center; /* Centraliza os elementos em telas menores */
 }
 
-
 .right-section {
-    width: 50%;
+    width: 100%; /* Ocupa toda a largura em telas menores */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-
 .login-box, .cadastro-box {
     width: 100%;
-    padding: 40px;
+    padding: 20px; /* Reduz o padding para dispositivos móveis */
     text-align: center;
 }
 
 .login-box h2, .cadastro-box h2 {
     color: #131314;
-    margin-bottom: 20px;
+    margin-bottom: 15px; /* Reduz a margem inferior para dispositivos móveis */
+    font-size: 1.8em; /* Ajusta o tamanho da fonte para melhor legibilidade */
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .input-group {
     position: relative;
-    margin-bottom: 15px;
+    margin-bottom: 10px; /* Reduz a margem inferior para dispositivos móveis */
 }
 
 .input-wrapper {
@@ -68,10 +67,11 @@ body {
 .input-wrapper input[type="email"],
 .input-wrapper input[type="password"] {
     width: calc(100% - 22px);
-    padding: 10px;
+    padding: 8px; /* Reduz o padding para dispositivos móveis */
     border: 1px solid #ddd;
     border-radius: 4px;
     box-sizing: border-box;
+    font-size: 1em; /* Ajusta o tamanho da fonte para melhor legibilidade */
 }
 
 .input-wrapper .icon {
@@ -86,12 +86,12 @@ body {
 .login-box button, .cadastro-box button {
     background-color: #1e0ff1;
     color: white;
-    padding: 12px 20px;
+    padding: 10px 18px; /* Reduz o padding para dispositivos móveis */
     border: none;
     border-radius: 4px;
     cursor: pointer;
     width: 100%;
-    font-size: 16px;
+    font-size: 1em; /* Ajusta o tamanho da fonte para melhor legibilidade */
 }
 
 .login-box button:hover, .cadastro-box button:hover {
@@ -99,7 +99,8 @@ body {
 }
 
 .login-box p, .cadastro-box p {
-    margin-top: 20px;
+    margin-top: 15px; /* Reduz a margem superior para dispositivos móveis */
+    font-size: 0.9em; /* Ajusta o tamanho da fonte para melhor legibilidade */
 }
 
 .login-box a, .cadastro-box a {
@@ -112,43 +113,33 @@ body {
 }
 
 .logo {
-    max-width: 700px;
-    margin-bottom: 30px;
-    justify-content: center;
-    align-items: center;
+    max-width: 80%; /* Ajusta o tamanho da logo para dispositivos móveis */
+    margin-bottom: 20px; /* Reduz a margem inferior para dispositivos móveis */
 }
 
 /* Media queries para responsividade */
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
-        width: 90%;
-    }
-
-    .left-section,
-    .right-section {
-        width: 100%;
-    }
-
-    .left-section {
-        padding: 30px;
-    }
-
-    .login-box, .cadastro-box {
-        padding: 30px;
     }
 }
 
 @media (max-width: 480px) {
     .left-section h1 {
-        font-size: 2em;
+        font-size: 1.8em; /* Reduz o tamanho da fonte para telas menores */
+        text-align: center;
     }
 
     .left-section h2 {
-        font-size: 1.2em;
+        font-size: 1.1em; /* Reduz o tamanho da fonte para telas menores */
+        text-align: center;
     }
 
     .left-section p {
-        font-size: 0.9em;
+        font-size: 0.8em; /* Reduz o tamanho da fonte para telas menores */
+    }
+
+    .logo {
+        max-width: 90%; /* Ajusta o tamanho da logo para telas menores */
     }
 }
