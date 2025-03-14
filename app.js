@@ -1,6 +1,8 @@
 // Importa as funções necessárias do Firebase SDK
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+// Importe o Firestore
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 // Configuração do Firebase
 const firebaseConfig = {
@@ -16,6 +18,8 @@ const firebaseConfig = {
 // Inicializa o Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+// Inicializa o Firestore
+const db = getFirestore(app);
 
 const loadingIndicator = document.createElement('div');
 loadingIndicator.textContent = 'Carregando...';
@@ -24,49 +28,75 @@ document.body.appendChild(loadingIndicator);
 
 // Função de login
 window.login = function() {
-    loadingIndicator.style.display = 'block'; // Show loading indicator
+    loadingIndicator.style.display = 'block';
     const email = document.getElementById('email').value.trim();
     const senha = document.getElementById('senha').value.trim();
 
-
     if (!email || !senha) {
         alert("Preencha todos os campos!");
+        loadingIndicator.style.display = 'none';
         return;
     }
 
     signInWithEmailAndPassword(auth, email, senha)
         .then((userCredential) => {
             const user = userCredential.user;
-            localStorage.setItem('user', JSON.stringify({ email: user.email }));
-            console.log("Login bem-sucedido! Redirecionando...");
-      console.log(localStorage.getItem('user'));
-            window.location.href = "https://kynistx7.github.io/MapUniachietas/#";
+            const userId = user.uid; // Pega o ID do usuário
+
+            // Busca o nome do usuário no Firestore
+            const userDocRef = doc(db, "users", userId); // Assumindo que você tem uma coleção "users"
+            getDoc(userDocRef)
+                .then((docSnap) => {
+                    if (docSnap.exists()) {
+                        const userData = docSnap.data();
+                        const nomeUsuario = userData.nome; // Assumindo que o nome está no campo "nome"
+
+                        localStorage.setItem('user', JSON.stringify({
+                            email: user.email,
+                            nome: nomeUsuario
+                        }));
+                        console.log("Login bem-sucedido! Redirecionando...");
+                        window.location.href = "https://kynistx7.github.io/MapUniachietas/#";
+                    } else {
+                        console.error("Documento do usuário não encontrado!");
+                        alert("Erro ao buscar dados do usuário.");
+                    }
+                    loadingIndicator.style.display = 'none';
+                })
+                .catch((error) => {
+                    console.error("Erro ao buscar dados do usuário:", error);
+                    alert("Erro ao buscar dados do usuário.");
+                    loadingIndicator.style.display = 'none';
+                });
         })
         .catch((error) => {
             console.error("Erro no login:", error);
             alert("Erro: " + traduzirErro(error.code));
+            loadingIndicator.style.display = 'none';
         });
 };
 
 window.cadastrar = function() {
-    loadingIndicator.style.display = 'block'; // Show loading indicator
+    loadingIndicator.style.display = 'block';
     const email = document.getElementById('email').value.trim();
     const senha = document.getElementById('senha').value.trim();
 
-
     if (!email || !senha) {
         alert("Preencha todos os campos!");
+        loadingIndicator.style.display = 'none';
         return;
     }
 
     createUserWithEmailAndPassword(auth, email, senha)
-        .then(() => {
+        .then((userCredential) => {
             alert("Cadastro realizado com sucesso!");
-            window.location.href = 'index.html';
+            window.location.href = 'https://kynistx7.github.io/LoginUni/';
+            loadingIndicator.style.display = 'none';
         })
         .catch((error) => {
             let errorMessage = traduzirErro(error.code);
             alert(errorMessage);
+            loadingIndicator.style.display = 'none';
         });
 };
 
@@ -93,7 +123,7 @@ function traduzirErro(codigo) {
         "auth/network-request-failed": "Erro de rede. Verifique sua conexão!",
         "auth/too-many-requests": "Muitas tentativas de login. Tente novamente mais tarde."
     };
-    return erros[codigo] || "Ocorreu um erro, tente novamente.";
+    return erros[codigo] || "Senha incorret.";
 }
 
 // Verificar se o usuário já está logado ao acessar o painel
