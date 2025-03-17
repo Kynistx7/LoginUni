@@ -1,6 +1,13 @@
 // Importa as funções necessárias do Firebase SDK
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    signOut,
+    GoogleAuthProvider, // Importe o GoogleAuthProvider
+    signInWithPopup // Importe signInWithPopup
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 // Importe o Firestore
 import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
@@ -26,7 +33,26 @@ loadingIndicator.textContent = 'Carregando...';
 loadingIndicator.style.display = 'none';
 document.body.appendChild(loadingIndicator);
 
-// Função de login
+// Função de login com Google
+window.loginComGoogle = function() {
+    loadingIndicator.style.display = 'block';
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+        .then((result) => {
+            const user = result.user;
+            localStorage.setItem('user', JSON.stringify({ email: user.email }));
+            console.log("Login com Google bem-sucedido! Redirecionando...");
+            window.location.href = "https://kynistx7.github.io/MapUniachietas/#";
+            loadingIndicator.style.display = 'none';
+        })
+        .catch((error) => {
+            console.error("Erro no login com Google:", error);
+            alert("Erro ao fazer login com Google: " + traduzirErro(error.code));
+            loadingIndicator.style.display = 'none';
+        });
+};
+
+// Função de login com email e senha
 window.login = function() {
     loadingIndicator.style.display = 'block';
     const email = document.getElementById('email').value.trim();
@@ -41,7 +67,7 @@ window.login = function() {
     signInWithEmailAndPassword(auth, email, senha)
         .then((userCredential) => {
             const user = userCredential.user;
-            localStorage.setItem('user', JSON.stringify({ email: user.email })); // store just the email now.
+            localStorage.setItem('user', JSON.stringify({ email: user.email }));
             console.log("Login bem-sucedido! Redirecionando...");
             window.location.href = "https://kynistx7.github.io/MapUniachietas/#";
             loadingIndicator.style.display = 'none';

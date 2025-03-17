@@ -2,11 +2,13 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Login com Fire</title>
+    <title>Login com Firebase</title>
     <link rel="stylesheet" href="style.css">
     <script src="app.js" type="module" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+    <div id="loading-indicator" style="display: none;">Carregando...</div>
     <div class="container">
         <div class="left-section">
             <img src="templetes/Grupo-Anchieta-01 (1).png" alt="Logo da Empresa" class="logo">
@@ -14,7 +16,7 @@
         <div class="right-section">
             <div class="login-box">
                 <h2>Cadastro</h2>
-                <form id="cadastro-form" onsubmit="event.preventDefault(); cadastrar();">
+                <form id="login-form" onsubmit="event.preventDefault(); cadastrar();">
                     <div class="input-group">
                         <label for="email">Email:</label>
                         <div class="input-wrapper">
@@ -31,7 +33,7 @@
                     </div>
                     <button type="submit">Entrar</button>
                 </form>
-                <p>Possui cadastro? <a href="index.html">Logue aqui</a></p>
+                <p>Possui conta? <a href="index.html">Logue aqui</a></p>
             </div>
         </div>
     </div>
