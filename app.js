@@ -69,7 +69,7 @@ window.login = function() {
             const user = userCredential.user;
             localStorage.setItem('user', JSON.stringify({ email: user.email }));
             console.log("Login bem-sucedido! Redirecionando...");
-            window.location.href = "https://kynistx7.github.io/MapUniachietas/#";
+            window.location.href = "https://kynistx7.github.io/MapUniAnchieta/";
             loadingIndicator.style.display = 'none';
         })
         .catch((error) => {
