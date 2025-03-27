@@ -42,7 +42,7 @@ window.loginComGoogle = function() {
             const user = result.user;
             localStorage.setItem('user', JSON.stringify({ email: user.email }));
             console.log("Login com Google bem-sucedido! Redirecionando...");
-            window.location.href = "https://kynistx7.github.io/MapUniachietas/#";
+            window.location.href = "https://kynistx7.github.io/MapUniAnchieta/nave.html";
             loadingIndicator.style.display = 'none';
         })
         .catch((error) => {
@@ -126,7 +126,7 @@ function traduzirErro(codigo) {
         "auth/network-request-failed": "Erro de rede. Verifique sua conexão!",
         "auth/too-many-requests": "Muitas tentativas de login. Tente novamente mais tarde."
     };
-    return erros[codigo] || "Senha incorret.";
+    return erros[codigo] || "Senha incorreta.";
 }
 
 // Verificar se o usuário já está logado ao acessar o painel
